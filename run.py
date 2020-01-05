@@ -43,7 +43,7 @@ for t in range(n_steps): # main loop
     theta_dot = observation[2]
 
     if np.cos(theta) > controller_handoff: # handoff between swing up control controller and proportional controller
-        print("🚨  proportional control 🚨")
+        print("proportional control")
         action = proportional_torque(theta, theta_dot) # proportional control
     else:
         action = swing_up_torque(theta, theta_dot) # swing up
