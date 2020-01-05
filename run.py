@@ -55,5 +55,5 @@ energy_difference {E(theta, theta_dot) - target_energy}
         ''')
     observation, reward, done, info = env.step([action])
 
-
+env.reset()
 print("done")
