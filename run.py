@@ -16,7 +16,7 @@ target_energy = E(0,0) # energy of the pendulum in the up position with no speed
 
 
 k_swingup = 5 # swing up magnitude constant
-k_proportional = 15. # propirtional control constant
+k_proportional = 10. # propirtional control constant
 
 controller_handoff = 0.94 # threshold value of cos(theta) for swing up and proportional control
 
