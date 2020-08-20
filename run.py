@@ -28,7 +28,7 @@ def swing_up_torque(theta, theta_dot): # calculate the swingup torque
 
 n_steps = 1000 # set length of run
 
-env = gym.make('raaspendulum-v0') # initialize envoirment
+env = gym.make('RaasPendulum-v0') # initialize envoirment
 env.reset()
 
 observation, reward, done, info = env.step([2]) # start with an initial impulse
