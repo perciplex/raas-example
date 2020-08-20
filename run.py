@@ -12,23 +12,23 @@ I = (1./3.) * m * l**2 # moment of inertia of a rod
 def E(theta, theta_dot): # energy
     return (I * theta_dot**2 / 2) + (np.cos(theta) * l * m * g / 2)
 
-target_energy = E(0,0) # energy of the pendulum in the up position with no speed
+target_energy = 1.3 * E(0,0) # energy of the pendulum in the up position with no speed
 
 
-k_swingup = 5 # swing up magnitude constant
-k_proportional = 10. # propirtional control constant
+k_swingup = 10 # swing up magnitude constant
+k_proportional = 15. # propirtional control constant
 
 controller_handoff = 0.94 # threshold value of cos(theta) for swing up and proportional control
 
 def proportional_torque(theta, theta_dot): # calculate the proportional torque
-    return -k_proportional * theta
+    return -k_proportional * theta - theta_dot
 
 def swing_up_torque(theta, theta_dot): # calculate the swingup torque
     return  -k_swingup * (E(theta, theta_dot)-target_energy) * theta_dot # 
 
 n_steps = 200 # set length of run
 
-env = gym.make('raaspendulum-v0') # initialize envoirment
+env = gym.make('RaasPendulum-v0') # initialize envoirment
 env.reset()
 
 observation, reward, done, info = env.step([2]) # start with an initial impulse
@@ -45,8 +45,9 @@ for t in range(n_steps): # main loop
         action = proportional_torque(theta, theta_dot) # proportional control
     else:
         action = swing_up_torque(theta, theta_dot) # swing up
-    
+    env.render()
     print(f'''action {action}
+    
 theta {theta}
 theta_dot {theta_dot}
 energy_difference {E(theta, theta_dot) - target_energy}
