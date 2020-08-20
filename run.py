@@ -26,7 +26,7 @@ def proportional_torque(theta, theta_dot): # calculate the proportional torque
 def swing_up_torque(theta, theta_dot): # calculate the swingup torque
     return  -k_swingup * (E(theta, theta_dot)-target_energy) * theta_dot # 
 
-n_steps = 1000 # set length of run
+n_steps = 200 # set length of run
 
 env = gym.make('raaspendulum-v0') # initialize envoirment
 env.reset()
@@ -36,8 +36,6 @@ sleep(1)
 
 for t in range(n_steps): # main loop
     print(f"step {t} out of {n_steps}")
-
-    sleep(0.01) # match simulation rate
 
     theta = np.arctan2(observation[1], observation[0]) # calculate theta
     theta_dot = observation[2]
